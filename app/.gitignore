@@ -1,1 +1,18 @@
 /build
+
+# Ignore IntelliJ IDEA project files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries
+.idea/shelf/
+.idea/deviceManager.xml
+.idea/appInsightsSettings.xml
+.idea/gradle.xml
+.idea/vcs.xml
+
+# Ignore local configuration
+local.properties
+
+# Ignore Google Services config
+app/google-services.json
