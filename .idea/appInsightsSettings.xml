@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.venu.loginbuddy" />
+                  <option name="mobileSdkAppId" value="1:853885226428:android:e54f65f4e6cb360c59efb9" />
+                  <option name="projectId" value="venu-projects-firebase" />
+                  <option name="projectNumber" value="853885226428" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
