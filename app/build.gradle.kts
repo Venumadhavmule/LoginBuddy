@@ -52,18 +52,30 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.firebase.common.ktx)
-    testImplementation(libs.junit)
-    implementation(platform("com.google.firebase:firebase-bom:33.1.1"))
+    implementation(platform(libs.firebase.bom))
 
-    // Now, declare other Firebase dependencies WITHOUT specifying a version
-    implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-auth-ktx")
-    implementation("com.google.firebase:firebase-firestore-ktx")
+    // Use the correctly defined aliases from libs.versions.toml
+    implementation(libs.firebase.analytics.ktx)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.firestore.ktx)
+    // Removed duplicate declaration of firebase-auth-ktx
+    implementation(libs.firebase.auth.ktx)
+
+    testImplementation(libs.junit)
+
+    implementation(libs.firebase.firestore.ktx)
+
+    // Example: Analytics
+    implementation(libs.firebase.analytics.ktx)
+    implementation("com.google.firebase:firebase-auth:24.0.1")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation("com.google.firebase:firebase-auth:24.0.1")
+    implementation("com.google.android.gms:play-services-gcm:17.0.0")
+    // Added Material Icons dependency
+    implementation(libs.androidx.material.icons.extended)
 }
