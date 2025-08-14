@@ -1,3 +1,5 @@
+// In your app/build.gradle.kts file
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -43,39 +45,44 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(platform(libs.firebase.bom)) // Use alias for the BOM platform
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
-    
+
+    // Use platform() for BOMs. We only need to declare each BOM once.
     implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.firebase.bom))
+
+    // Use the correctly defined aliases for each library.
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.navigation.compose)
+
+    // Use a single platform() declaration for each BOM
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(platform(libs.firebase.bom))
+
+    // Correctly declare compose libraries without versions
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(platform(libs.firebase.bom))
+    implementation(libs.androidx.material.icons.extended)
 
-    // Use the correctly defined aliases from libs.versions.toml
-    implementation(libs.firebase.analytics.ktx)
-    implementation(libs.firebase.auth.ktx)
-    implementation(libs.firebase.firestore.ktx)
-    // Removed duplicate declaration of firebase-auth-ktx
-    implementation(libs.firebase.auth.ktx)
+    // Firebase libraries (versions are managed by firebase.bom)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
 
+    // Test dependencies
     testImplementation(libs.junit)
 
-    implementation(libs.firebase.firestore.ktx)
-
-    // Example: Analytics
-    implementation(libs.firebase.analytics.ktx)
-    implementation("com.google.firebase:firebase-auth:24.0.1")
+    // The key change: Apply the Compose BOM to androidTestImplementation
+    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("com.google.firebase:firebase-auth:24.0.1")
-    implementation("com.google.android.gms:play-services-gcm:17.0.0")
-    // Added Material Icons dependency
-    implementation(libs.androidx.material.icons.extended)
 }
