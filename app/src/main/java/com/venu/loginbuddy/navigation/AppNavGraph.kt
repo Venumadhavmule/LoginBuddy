@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import com.venu.loginbuddy.screens.ForgotPasswordScreen
 import com.venu.loginbuddy.screens.HomeScreen
 import com.venu.loginbuddy.screens.LoginScreen
+import com.venu.loginbuddy.screens.PhoneAuthScreen
 import com.venu.loginbuddy.screens.SignUpScreen
 
 sealed class Screen(val route: String) {
@@ -33,7 +34,7 @@ fun AppNavGraph(navController: NavHostController) {
             ForgotPasswordScreen(navController = navController)
         }
         composable(route = Screen.PhoneAuth.route) {
-
+            PhoneAuthScreen(navController = navController)
         }
     }
 }

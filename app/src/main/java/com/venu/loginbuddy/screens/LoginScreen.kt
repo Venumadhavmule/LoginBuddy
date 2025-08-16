@@ -120,7 +120,7 @@ fun LoginScreen(navController: NavController) {
                     }
                 }
             } else {
-                Toast.makeText(context, "Please enter email and password", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "Please enter email and password", Toast.LENGTH_LONG)
                     .show()
             }
         }) {
