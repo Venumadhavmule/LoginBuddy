@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.venu.loginbuddy.screens.HomeScreen
 import com.venu.loginbuddy.screens.LoginScreen
+import com.venu.loginbuddy.screens.SignUpScreen
 
 sealed class Screen(val route: String) {
     object Login : Screen("login_screen")
@@ -21,10 +23,10 @@ fun AppNavGraph(navController: NavHostController) {
             LoginScreen(navController = navController)
         }
         composable(Screen.Signup.route) {
-
+            SignUpScreen(navController = navController)
         }
         composable(Screen.Home.route) {
-
+            HomeScreen(navController = navController)
         }
         composable(Screen.ForgotPassword.route) {
 
