@@ -9,8 +9,10 @@ import com.venu.loginbuddy.screens.HomeScreen
 import com.venu.loginbuddy.screens.LoginScreen
 import com.venu.loginbuddy.screens.PhoneAuthScreen
 import com.venu.loginbuddy.screens.SignUpScreen
+import com.venu.loginbuddy.screens.SplashScreen
 
 sealed class Screen(val route: String) {
+    object Splash : Screen(route = "splash_screen")
     object Login : Screen("login_screen")
     object Home : Screen("home_screen")
     object Signup : Screen("signup_screen")
@@ -19,8 +21,11 @@ sealed class Screen(val route: String) {
 }
 
 @Composable
-fun AppNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+fun AppNavGraph(navController: NavHostController, startDestination: String) {
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable(Screen.Splash.route) {
+            SplashScreen(navController = navController)
+        }
         composable(Screen.Login.route) {
             LoginScreen(navController = navController)
         }

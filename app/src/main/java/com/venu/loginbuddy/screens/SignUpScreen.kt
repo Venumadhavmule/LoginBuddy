@@ -120,7 +120,7 @@ fun SignUpScreen(navController: NavController = NavController(LocalContext.curre
                                         context,
                                         "Sign Up Failed:${task.exception?.message}",
                                         Toast.LENGTH_SHORT
-                                    )
+                                    ).show()
                                 }
                             }
                     } else {

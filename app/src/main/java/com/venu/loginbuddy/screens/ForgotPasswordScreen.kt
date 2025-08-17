@@ -61,7 +61,7 @@ fun ForgotPasswordScreen(navController: NavController) {
                             if (task.isSuccessful) {
                                 Toast.makeText(
                                     context,
-                                    "Password reset email sent",
+                                    "if you enter a valid email, you will receive a reset link",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             } else {
