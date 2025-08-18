@@ -58,6 +58,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
 
+    implementation(libs.play.services.auth)
+
     // Use a single platform() declaration for each BOM
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.firebase.bom))

@@ -1,7 +1,11 @@
 package com.venu.loginbuddy.screens
 
 
+import android.app.Activity
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -41,7 +44,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
+import com.venu.loginbuddy.R
 import com.venu.loginbuddy.navigation.Screen
 import com.venu.loginbuddy.ui.theme.LoginBuddyTheme
 
@@ -55,6 +63,57 @@ fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf(value = "") }
     var passwordVisibility by remember { mutableStateOf(false) }
+
+    val webClientId = context.getString(R.string.default_web_client_id)
+    val gso = remember {
+        GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(webClientId)
+            .requestEmail()
+            .build()
+    }
+
+    val googleSignInClient = remember { GoogleSignIn.getClient(context, gso) }
+
+    val googleSignInLauncherActivity =
+        rememberLauncherForActivityResult(
+            contract = ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                try {
+                    val account = task.getResult(ApiException::class.java)!!
+                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                    auth.signInWithCredential(credential)
+                        .addOnCompleteListener { firebaseTask ->
+                            if (firebaseTask.isSuccessful) {
+                                Toast.makeText(
+                                    context,
+                                    "Google Sign In Successful",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                navController.navigate(Screen.Home.route) {
+                                    popUpTo(Screen.Login.route) { inclusive = true }
+                                }
+                            } else {
+                                Toast.makeText(
+                                    context,
+                                    "Google Sign In Failed: ${firebaseTask.exception?.message}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        }
+                } catch (e: ApiException) {
+                    Log.w("GoogleSignIn", "Google sign in failed", e)
+                    Toast.makeText(
+                        context,
+                        "Google Sign In Failed: ${e.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, "Google Sign In Cancelled", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     Column(
         modifier = Modifier
@@ -142,11 +201,8 @@ fun LoginScreen(navController: NavController) {
 
         Button(
             onClick = {
-                Toast.makeText(
-                    context,
-                    "Google Sign-In will be implemented here. ",
-                    Toast.LENGTH_SHORT
-                ).show()
+                val signInIntent = googleSignInClient.signInIntent
+                googleSignInLauncherActivity.launch(signInIntent)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
