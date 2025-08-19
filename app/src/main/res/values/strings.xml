@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">LoginBuddy</string>
-    <string name="default_web_client_id">Insert Your Firebase Web Client Id Here</string>
+    <string name="default_web_client_id">Insert Your Firebase Client</string>
 </resources>

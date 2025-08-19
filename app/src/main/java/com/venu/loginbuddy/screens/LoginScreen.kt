@@ -261,10 +261,3 @@ fun DividerWithText(text: String) {
     }
 }
 
-@Preview
-@Composable
-fun LoginScreenPreview() {
-    LoginBuddyTheme {
-        LoginScreen(NavHostController(LocalContext.current))
-    }
-}

@@ -64,6 +64,8 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(platform(libs.firebase.bom))
 
+    implementation(libs.androidx.ui.text.google.fonts)
+
     // Correctly declare compose libraries without versions
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
