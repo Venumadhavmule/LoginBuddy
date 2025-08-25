@@ -14,9 +14,9 @@ This project focuses on simplicity, clean UI design, and ease of integration, se
 
 ## 📸 Screenshots  
 
-| Login Screen | Sign Up Screen | Home Screen |
+| Login Screen | Sign Up Screen | Welcome Screen |
 |--------------|----------------|-------------|
-| ![Login Screen](Screenshots/Login_Screen.jpg) | ![Sign Up Screen](Screenshots/SignUp_Screen.jpg) | ![Home Screen](Screenshots/Welcome_Screen.jpg) |
+| ![Login Screen](Screenshots/Login_Screen.jpg) | ![Sign Up Screen](Screenshots/SignUp_Screen.jpg) | ![Welcome Screen](Screenshots/Welcome_Screen.jpg) |
 
 ---
 
@@ -49,4 +49,5 @@ Contributions are welcome! 🎉
 Feel free to fork this repo, open issues, or submit pull requests to improve the project.  
 
 ---
+
 
